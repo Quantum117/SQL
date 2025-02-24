@@ -72,28 +72,22 @@ VALUES
 
 	-- Task1
 
-
-
-Select  * from Employees
-
-
-SELECT Department, AVG(Salary) as AverageSalary,
-  CASE
-    WHEN AVG(Salary) > 80000 Then 'High'
-    WHEN (AVG(Salary) >= 50000 and AVG(Salary) <= 80000) Then 'Medium'
-    ELSE 'Low'
-  END
-  AS SalaryCategory
-
-FROM (
-  SELECT Top 40
-  *
-  FROM Employees
-  ORDER BY Salary DESC
-  ) as p
-GROUP BY Department
+WITH RankedEmployees AS (
+    SELECT EmployeeID, FirstName, LastName, Department, Salary,
+           CASE
+               WHEN Salary > 80000 THEN 'High'
+               WHEN Salary BETWEEN 50000 AND 80000 THEN 'Medium'
+               ELSE 'Low'
+           END AS SalaryCategory,
+           PERCENT_RANK() OVER (ORDER BY Salary DESC) AS PercentileRank
+    FROM Employees
+)
+SELECT EmployeeID, FirstName, LastName, Department, Salary, SalaryCategory,
+       AVG(Salary) OVER (PARTITION BY Department) AS AverageSalary
+FROM RankedEmployees
+WHERE PercentileRank <= 0.10
 ORDER BY AverageSalary DESC
-OFFSET 2 ROWS FETCH FIRST 5 ROWS ONLY;
+OFFSET 2 ROWS FETCH NEXT 5 ROWS ONLY;
 
 
 -- Task2
