@@ -130,14 +130,6 @@ GROUP BY Status
 HAVING SUM(TotalAmount) > 5000
 ORDER BY TotalRevenue DESC;
 
---
-
-SELECT Orders.*, TotalAmounts.SumTotalAmount
-FROM Orders
-JOIN
-    (SELECT Status, SUM(TotalAmount) AS SumTotalAmount FROM Orders GROUP BY Status) TotalAmounts
-ON Orders.Status = TotalAmounts.Status;
-
 --Task3
 
 INSERT INTO Products (ProductID, ProductName, Category, Price, Stock)
