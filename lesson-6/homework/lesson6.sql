@@ -47,9 +47,9 @@ INSERT INTO Projects (ProjectID, ProjectName, EmployeeID) VALUES
 (4, 'Delta', 4),
 (5, 'Omega', NULL);
 
-
 Select * from Employees ;
 Select * from Departments ;
+
 ----Q1
 SELECT e.Name, d.DepartmentName  
 FROM Employees AS e  
@@ -63,7 +63,6 @@ LEFT JOIN Departments AS d
 ON e.DepartmentID = d.DepartmentID;
 
 --Q3
-
 SELECT e.Name, d.DepartmentName  
 FROM Employees AS e  
 Right JOIN Departments AS d  
@@ -81,14 +80,12 @@ FROM Employees e
 JOIN Departments d ON e.DepartmentID = d.DepartmentID
 GROUP BY d.DepartmentName;
 
-
 ---Q6 
 SELECT e.Name, d.DepartmentName  
 FROM Employees AS e  
 Cross JOIN Departments AS d  ;
 
---- Q7  
-
+--- Q7
 SELECT e.Name, e.DepartmentID, d.DepartmentName  ,
 p.ProjectName
 FROM Employees AS e  
