@@ -33,8 +33,7 @@ Select * from Employees;
 	 --- Aka Recursive member
 	 Select e.EmployeeID ,e.ManagerId, e.JobTitle, hr.depth +1  
 	 from Employees e 
-	 inner join hierarchy hr on e.ManagerID = hr.EmployeeID
-) 
+  )
 ---The recursion continues until no more records are found.
 Select * from hierarchy;
 
