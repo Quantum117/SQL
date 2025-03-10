@@ -17,4 +17,4 @@ union all
 select N+7 as N, Num
 from Shipments)
 select avg(num) as median from full_table 
-where value in (21,22)
+where value in (20,21)
