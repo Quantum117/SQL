@@ -29,5 +29,5 @@ full_count AS (
 )
 SELECT AVG(Num) AS median 
 FROM full_table, full_count
---- this logic handles both even and odd number of days 
+--- this logic handles both even and odd number of shipment days 
 WHERE N IN ((total_rows + 1) / 2, (total_rows / 2) + 1);
